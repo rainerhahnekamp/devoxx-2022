@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { Episode } from '../model/episode';
-import {remark} from "remark";
+import { remark } from 'remark';
 import html from 'remark-html';
 
 const episodeSchema = z.object({
@@ -17,7 +17,7 @@ export async function parseEpisode(obj: unknown): Promise<Episode> {
   return {
     ...episode,
     imageSrc: `http://localhost:8080/${episode.imageSrc}`,
-    content: episode.content,
+    content: content,
     contentMd: episode.content,
   };
 }

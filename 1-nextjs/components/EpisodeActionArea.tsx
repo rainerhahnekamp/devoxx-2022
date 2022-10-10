@@ -2,7 +2,6 @@ import { Episode } from '../model/episode';
 import Button from './Button';
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
-import { EpisodesProps } from './Episodes';
 
 const EditEpisodeWrapper = dynamic(() => import('./EpisodeEdit'), {
   ssr: false,

@@ -1,11 +1,5 @@
 import { Episode } from '../model/episode';
-import ReactMarkdown from 'react-markdown';
-import dynamic from 'next/dynamic';
 import EpisodeActionArea from './EpisodeActionArea';
-
-const EditEpisodeWrapper = dynamic(() => import('./EpisodeEdit'), {
-  ssr: false,
-});
 
 export type EpisodeProps = {
   episode: Episode;
@@ -23,9 +17,10 @@ export function EpisodeCard({ episode }: EpisodeProps) {
           />
         </div>
         <div className="w-full py-4 px-6 text-gray-800 flex flex-col justify-between">
-          <ReactMarkdown className="line-clamp-5 markdown-body">
-            {episode.contentMd}
-          </ReactMarkdown>
+          <div
+            className="line-clamp-5 markdown-body"
+            dangerouslySetInnerHTML={{ __html: episode.content }}
+          ></div>
         </div>
       </div>
       <EpisodeActionArea episode={episode}></EpisodeActionArea>
