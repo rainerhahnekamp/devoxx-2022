@@ -23,7 +23,10 @@ export const EpisodeCard = component$(({ episode }: EpisodeProps) => {
           />
         </div>
         <div className="w-full py-4 px-6 text-gray-800 flex flex-col justify-between h-64">
-          {episode.content}
+          <div
+            className="markdown-body line-clamp-5"
+            dangerouslySetInnerHTML={episode.content}
+          ></div>
         </div>
       </div>
       <EpisodeActionArea episode={episode}></EpisodeActionArea>
