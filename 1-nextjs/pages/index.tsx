@@ -1,25 +1,16 @@
-import type { NextPage } from 'next';
-import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { Episode } from '../model/episode';
+import { parseEpisode } from '../logic/parse-episode';
+import { Episodes } from '../components/Episodes';
 
-const Home: NextPage = () => {
-  return (
-    <>
-      <h1>Welcome to ng-news</h1>
-      <ul>
-        <li>
-          <Link href="native">Episodes loaded natively</Link>
-        </li>
-        <li>
-          <Link href="server-props">Episodes loaded via Server Props</Link>
-        </li>
-        <li>
-          <Link href="server-component">
-            Episodes via React Server Component
-          </Link>
-        </li>
-      </ul>
-    </>
-  );
-};
+export default function Native() {
+    const [episodes, setEpisodes] = useState<Episode[]>([]);
 
-export default Home;
+    useEffect(() => {
+        fetch('http://localhost:8080/episode')
+            .then((res) => res.json())
+            .then((episodes) => Promise.all(episodes.map(parseEpisode)))
+            .then(setEpisodes);
+    }, []);
+    return <Episodes episodes={episodes}></Episodes>;
+}
