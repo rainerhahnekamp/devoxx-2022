@@ -10,11 +10,8 @@ const episodeSchema = z.object({
 
 export function parseEpisode(obj) {
   const episode = episodeSchema.parse(obj);
-  const processedContent = marked(obj.content);
-  const content = processedContent.toString();
 
   return Object.assign(episode, {
     imageSrc: `http://localhost:8080/${episode.imageSrc}`,
-    content,
   });
 }

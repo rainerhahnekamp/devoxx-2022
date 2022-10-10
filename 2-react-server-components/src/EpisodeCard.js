@@ -1,4 +1,5 @@
 import Button from './Button';
+import Markdown from './Markdown';
 
 export default function EpisodeCard({episode}) {
   return (
@@ -14,10 +15,7 @@ export default function EpisodeCard({episode}) {
       </div>
 
       <div className="w-full py-4 px-6 text-gray-800 flex flex-col justify-between">
-        <div
-          className="markdown-body line-clamp-5"
-          dangerouslySetInnerHTML={{__html: episode.content}}></div>
-
+        <Markdown markdown={episode.content}></Markdown>
         <div className="flex justify-evenly">
           <Button label="More Info" />
           <Button label="Edit" />

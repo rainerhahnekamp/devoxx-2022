@@ -6,12 +6,8 @@
  *
  */
 
-import {Episodes} from "./Episodes.server";
-import {fetch} from 'react-fetch';
-import {parseEpisode} from "./logic/parse-episode";
+import OverviewClient from './Overview.client';
 
 export default function App() {
-  const response = fetch('http://localhost:8080/episode').json();
-  const episodes = response.map(parseEpisode);
-  return <Episodes episodes={episodes}></Episodes>;
+  return <OverviewClient></OverviewClient>;
 }

@@ -1,4 +1,4 @@
-import EpisodeCard from './EpisodeCard.server';
+import EpisodeCard from './EpisodeCard';
 
 export function Episodes({episodes}) {
   return (
