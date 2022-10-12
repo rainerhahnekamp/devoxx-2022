@@ -2,15 +2,18 @@ import { useEffect, useState } from 'react';
 import { Episode } from '../model/episode';
 import { parseEpisode } from '../logic/parse-episode';
 import { Episodes } from '../components/Episodes';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
-export default function Native() {
-    const [episodes, setEpisodes] = useState<Episode[]>([]);
+export const getServerSideProps: GetServerSideProps = async () => {
+  const episodes = await fetch('http://localhost:8080/episode')
+    .then((res) => res.json())
+    .then((episodes) => Promise.all(episodes.map(parseEpisode)));
 
-    useEffect(() => {
-        fetch('http://localhost:8080/episode')
-            .then((res) => res.json())
-            .then((episodes) => Promise.all(episodes.map(parseEpisode)))
-            .then(setEpisodes);
-    }, []);
-    return <Episodes episodes={episodes}></Episodes>;
+  return { props: { episodes } };
+};
+
+export default function Native(
+  props: InferGetServerSidePropsType<typeof getServerSideProps>
+) {
+  return <Episodes episodes={props.episodes}></Episodes>;
 }

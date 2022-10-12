@@ -6,8 +6,8 @@
  *
  */
 
-import OverviewClient from './Overview.client';
+import OverviewServer from './Overview.server';
 
 export default function App() {
-  return <OverviewClient></OverviewClient>;
+  return <OverviewServer></OverviewServer>;
 }
